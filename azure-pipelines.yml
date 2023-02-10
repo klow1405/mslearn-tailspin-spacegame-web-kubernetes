@@ -24,7 +24,7 @@ stages:
         buildContext: $(Build.Repository.LocalPath)
         repository: $(webRepository)
         dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.Web/Dockerfile'
-        containerRegistry: 'Container Registry Connection1'
+        containerRegistry: 'Container Registry Connection'
         tags: |
           $(tag)
     - task: Docker@2
@@ -34,7 +34,7 @@ stages:
           buildContext: $(Build.Repository.LocalPath)
           repository: $(leaderboardRepository)
           Dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.LeaderboardContainer/Dockerfile'
-          containerRegistry: 'Container Registry Connection1'
+          containerRegistry: 'Container Registry Connection'
 
     - publish: '$(Build.SourcesDirectory)/manifests'
       artifact: manifests
@@ -61,7 +61,7 @@ stages:
             inputs:
               action: createSecret
               secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: 'Container Registry Connection1'
+              dockerRegistryEndpoint: 'Container Registry Connection'
               kubernetesServiceConnection: 'Kubernetes Cluster Connection'
               namespace: 'default'
           - task: KubernetesManifest@0
